@@ -9,19 +9,18 @@ tags:
   - Laravel
 ---
 
-## Bookandgolf : Plateforme de réservation de green fee
+## Plateforme de réservation de green fee
 
-### Résumé
-Refonte d’une des principales plateformes de réservation en ligne de green fee, avec une amélioration de l’expérience utilisateur, une refonte technique et une optimisation de la stratégie e-commerce (SEO, SEA). Le projet visait à moderniser l’interface et renforcer l’attractivité commerciale de la plateforme.
+Refonte complète d'une plateforme leader de réservation en ligne de green fee, visant à moderniser l'expérience utilisateur et améliorer les performances techniques.
 
-### Contexte et enjeux
-- Améliorer l’expérience utilisateur grâce à une nouvelle interface UX et une refonte graphique.
-- Moderniser la plateforme avec une refonte technique complète.
-- Optimiser la visibilité et l’acquisition client via des préconisations en SEO et SEA.
+### Technologies utilisées
+Laravel, MySQL, SEO/SEA
 
-### Missions principales
-- Maintenance technique pour garantir la fiabilité et la performance de la plateforme.
+### Réalisations
+- Maintenance et optimisation de l'application Laravel existante
+- Amélioration des performances et de la stabilité de la plateforme
+- Support à la refonte graphique et UX
+- Contribution aux optimisations SEO pour améliorer la visibilité
 
-### Résultats
-- Une plateforme modernisée, offrant une meilleure expérience utilisateur.
-- Un renforcement de la visibilité en ligne et une acquisition client optimisée grâce aux améliorations e-commerce.
+### Impact
+Plateforme modernisée avec une meilleure expérience utilisateur et une acquisition client optimisée grâce aux améliorations techniques et SEO.

@@ -12,18 +12,18 @@ tags:
 
 ## ERP pour les métiers de la carrosserie
 
-### Résumé
-Conception et développement d’un ERP dédié aux professionnels de la carrosserie, avec une interface intuitive et des fonctionnalités adaptées (gestion des rendez-vous, CRM, plannings, lien avec les assurances, etc.). Le système centralise les données et automatise les tâches clés pour simplifier la gestion quotidienne.
+Conception et développement from scratch d'un ERP complet dédié aux professionnels de la carrosserie, centralisant la gestion des rendez-vous, le CRM, les plannings et les relations avec les assurances.
 
-### Missions principales
-- Conception et développement de bases de données adaptées.
-- Participation au développement d’une API Laravel
-- Création de devis client, suivi en atelier des différents travaux à effectuer sur un véhicule
-- gestion de commande des pièces aux fournisseurs de la carosserie
-- Intégration d’API externes (outils comptables, solutions tierces).
-- Maintenance et optimisation applicative.
+### Technologies utilisées
+Laravel, MySQL, API REST, Intégrations tierces (IRIS, outils comptables)
 
-### Résultats
-- Solution interconnectée et évolutive
-- Gain de temps grâce à l’automatisation et la centralisation des données.
-- Amélioration de la visibilité et de la gestion globale de la carrosserie
+### Réalisations
+- Architecture et développement de l'API Laravel
+- Conception de la base de données métier
+- Développement du module de création et gestion de devis clients
+- Système de suivi en atelier des travaux sur véhicules
+- Gestion automatisée des commandes fournisseurs
+- Intégration d'API externes (comptabilité, assurances)
+
+### Impact
+Solution complète permettant aux carrossiers de centraliser leurs opérations, réduisant significativement le temps administratif et améliorant la visibilité sur leur activité.

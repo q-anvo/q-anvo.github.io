@@ -10,44 +10,46 @@ import Hero from '../components/Hero.astro';
 		<main class="wrapper about">
 			<Hero
 				title="À propos"
-				tagline="Découvrez mon parcours et mes compétences."
+				tagline="Développeur passionné, expert Laravel depuis plus de 10 ans."
 			>
-				<img
-					width="1553"
-					height="873"
-					src="/assets/quentin-casquette.jpg"
-					alt="Quentin Anvo et sa caquette Laravel"
-				/>
-				<p>
-					Casquette Laravel, Code style impeccable
-				</p>
+				<div>
+					<img
+						src="/assets/quentin-casquette.jpg"
+						alt="Quentin Anvo et sa casquette Laravel"
+					/>
+				</div>
 			</Hero>
 
 			<section>
-				<h2 class="section-title">Background</h2>
+				<h2 class="section-title">Mon parcours</h2>
 				<div class="content">
-					
-				<p> Après avoir obtenu une licence en informatique à la faculté de Caen, suivie d’une licence professionnelle, j’ai rejoint l'entreprise Soyhuce en 2015. </p>
-				<br/>
-				<p> Développeur back-end sénior avec 9 ans d’expérience dans le développement web, j'ai axé ma carrière sur la maîtrise de PHP, en particulier avec le framework Laravel. </p>
-				<br/>
-				<p> Au fil des années, j’ai élargi mes compétences en travaillant sur des applications web en Laravel principalement mais également en Python. J'ai également chercher à approfondir mes connaissances en ingénierie data, notamment à travers les services cloud. </p>
-				<br/>
-				<p> Curieux et polyvalent, je suis non seulement expert dans le développement back-end, mais également motivé à développer mes compétences en ingénierie data et à explorer de nouveaux domaines tels que le front-end et le SEO, afin de proposer des solutions modernes et performantes. </p>
-
-
+					<p>Diplômé d'une licence professionnelle en informatique à Caen, j'ai débuté ma carrière en 2015 chez Soyhuce, où j'ai rapidement développé une expertise approfondie en développement web avec Laravel.</p>
+					<br/>
+					<p>Fort de plus de 10 ans d'expérience, je me suis spécialisé dans la conception d'applications web robustes et performantes. Mon expertise couvre l'ensemble du cycle de développement : de l'architecture technique à la mise en production, en passant par l'optimisation des performances et la sécurité.</p>
 				</div>
 			</section>
 			<section>
-				<h2 class="section-title">Diplômes</h2>
+				<h2 class="section-title">Mon expertise</h2>
 				<div class="content">
-					<p>Bac + 3 CONCEPTEUR DE SYSTÈME D’INFORMATION</p>
+					<p><strong>Laravel Expert</strong> - Maîtrise complète du framework Laravel pour créer des applications web sur mesure, des API RESTful aux systèmes complexes de gestion.</p>
+					<br/>
+					<p><strong>Sites vitrines sur mesure</strong> - Création de sites web personnalisés, modernes et responsive, optimisés pour le référencement naturel (SEO) et adaptés à vos besoins spécifiques.</p>
+					<br/>
+					<p><strong>Architecture & Performance</strong> - Conception d'architectures scalables et maintenables, avec une attention particulière portée aux bonnes pratiques de développement et à la qualité du code.</p>
 				</div>
 			</section>
 			<section>
-				<h2 class="section-title">Skills</h2>
+				<h2 class="section-title">Ma philosophie</h2>
 				<div class="content">
-					<p>Curieux, Créatif, Autonome, Organisé, Dynamique, Polyvalent, Travail d'équipe</p>
+					<p>Je crois en un développement centré sur la qualité et la collaboration. Code propre, tests rigoureux, et travail d'équipe sont au cœur de ma démarche. J'accompagne mes clients dans la transformation de leurs idées en solutions digitales concrètes et pérennes.</p>
+					<br/>
+					<p>Curieux et en veille technologique permanente, je m'adapte aux évolutions du web pour proposer des solutions modernes, sécurisées et performantes.</p>
+				</div>
+			</section>
+			<section>
+				<h2 class="section-title">Compétences clés</h2>
+				<div class="content">
+					<p>Laravel • PHP • MySQL • API REST • Git • Design Patterns • Tests automatisés • SEO • Responsive Design</p>
 				</div>
 			</section>
 		</main>
@@ -67,6 +69,8 @@ import Hero from '../components/Hero.astro';
 		margin-top: 1.5rem;
 		border-radius: 1.5rem;
 		box-shadow: var(--shadow-md);
+		height: 800px;
+		width: 450px;
 	}
 
 	section {

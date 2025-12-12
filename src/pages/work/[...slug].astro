@@ -7,6 +7,7 @@ import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
+import Icon from '../../components/Icon.astro';
 
 interface Props {
 	entry: CollectionEntry<'work'>;
@@ -39,6 +40,11 @@ const { Content } = await entry.render();
 								{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
 							</div>
 							<p class="description">{entry.data.description}</p>
+							{entry.data.url && (
+								<a href={entry.data.url} target="_blank" rel="noopener noreferrer" class="website-link">
+									<Icon icon="rocket-launch" size="1.2em" /> Visiter le site
+								</a>
+							)}
 						</div>
 					</Hero>
 				</div>
@@ -83,6 +89,24 @@ const { Content } = await entry.render();
 	.description {
 		font-size: var(--text-lg);
 		max-width: 54ch;
+	}
+
+	.website-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: var(--accent-regular);
+		color: var(--gray-999);
+		border-radius: 999rem;
+		text-decoration: none;
+		font-weight: 600;
+		transition: background-color var(--theme-transition);
+	}
+
+	.website-link:hover,
+	.website-link:focus {
+		background: var(--accent-dark);
 	}
 
 	.content {
