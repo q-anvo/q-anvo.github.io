@@ -1,0 +1,103 @@
+---
+---
+
+<section id="about" class="py-28 px-6 md:px-16 xl:px-24" style="background: var(--color-cream);">
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+    <!-- Text -->
+    <div class="flex flex-col gap-6">
+      <p class="font-mono text-[11px] tracking-[2px] uppercase" style="color: var(--color-accent);">
+        <span data-fr>À propos</span><span data-en>About</span>
+      </p>
+      <h2 class="font-display font-extrabold text-[clamp(28px,4vw,44px)] leading-[1.1]" style="color: var(--color-text-dark);">
+        <span data-fr>Rigueur, qualité, polyvalence.</span>
+        <span data-en>Rigour, quality, versatility.</span>
+      </h2>
+      <p class="text-[15px] leading-[1.8]" style="color: #555;">
+        <span data-fr>
+          Diplômé en informatique, j'ai passé plus de 10 ans à construire des applications robustes.
+          Mon approche DDD &amp; TDD garantit un code propre, testable et maintenable — quel que soit votre domaine métier.
+        </span>
+        <span data-en>
+          Computer science graduate with 10+ years building robust applications.
+          My DDD &amp; TDD approach ensures clean, testable and maintainable code — whatever your business domain.
+        </span>
+      </p>
+
+      <!-- Stats -->
+      <div class="flex gap-8" id="about-stats">
+        <div>
+          <div class="font-display font-extrabold text-[36px] leading-none" style="color: var(--color-accent);">10+</div>
+          <div class="font-mono text-[10px] mt-0.5" style="color: #888;">
+            <span data-fr>années d'expérience</span><span data-en>years of experience</span>
+          </div>
+        </div>
+        <div id="stat-dynamic-1"></div>
+        <div id="stat-dynamic-2"></div>
+      </div>
+
+      <a
+        href="https://www.linkedin.com/in/quentin-anvo"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 self-start px-5 py-3 rounded font-display font-semibold text-[15px] no-underline hover:opacity-90 transition-opacity"
+        style="background: var(--color-text-dark); color: #fff;"
+      >
+        <span data-fr>Me contacter <span aria-hidden="true">→</span></span><span data-en>Get in touch <span aria-hidden="true">→</span></span>
+      </a>
+    </div>
+
+    <!-- Avatar -->
+    <div class="relative max-w-[320px] md:max-w-none mx-auto md:mx-0">
+      <div class="rounded-2xl overflow-hidden" style="box-shadow: 0 16px 48px rgba(0,0,0,0.1); aspect-ratio: 1;">
+        <img
+          src="/assets/avatar.png"
+          alt="Quentin Anvo"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div
+        class="absolute -bottom-3 -left-3 px-4 py-3 rounded-lg text-white"
+        style="background: var(--color-accent); box-shadow: 0 8px 24px oklch(55% 0.22 260 / 0.4);"
+      >
+        <div class="font-mono text-[10px] opacity-70 mb-0.5">STACK PRINCIPAL</div>
+        <div class="font-display font-bold text-[16px]">Laravel + DDD/TDD</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { STATS } from '../data/stats';
+
+  const scenarioId = document.documentElement.dataset.scenario ?? 'creation';
+  const coupled    = STATS.find(s => s.theme === scenarioId);
+  const pool       = STATS
+    .filter(s => s !== coupled)
+    .filter(s => s.fr !== "années d'expérience")
+    .sort(() => Math.random() - 0.5);
+
+  const chosen = [coupled ?? pool[0], pool[0]].filter(Boolean);
+
+  function renderStat(container: HTMLElement | null, stat: typeof STATS[0] | undefined) {
+    if (!container || !stat) return;
+    container.innerHTML = `
+      <div class="font-display font-extrabold text-4xl leading-none" style="color: var(--color-accent);">${stat.n}</div>
+      <div class="font-mono text-[10px] mt-0.5" style="color: #888; max-width: 120px; line-height: 1.3;">
+        <span data-fr>${stat.fr}</span><span data-en>${stat.en}</span>
+      </div>
+    `;
+  }
+
+  renderStat(document.getElementById('stat-dynamic-1'), chosen[0]);
+  renderStat(document.getElementById('stat-dynamic-2'), chosen[1]);
+
+  document.addEventListener('langchange', (e: Event) => {
+    const next = (e as CustomEvent).detail as string;
+    document.querySelectorAll('#about-stats [data-fr], #about-stats [data-en]').forEach(el => {
+      const key = el.hasAttribute('data-fr') ? 'fr' : 'en';
+      (el as HTMLElement).style.display = key === next ? '' : 'none';
+    });
+  });
+</script>

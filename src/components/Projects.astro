@@ -1,0 +1,119 @@
+---
+import { PROJECTS, PROJECT_TAGS } from '../data/projects';
+
+const tagLabels: Record<string, { fr: string; en: string }> = {
+  'Tous':               { fr: 'Tous',               en: 'All' },
+  'Site web':           { fr: 'Site web',            en: 'Website' },
+  'Application métier': { fr: 'Application métier',  en: 'Business app' },
+  'IoT & Data':         { fr: 'IoT & Data',          en: 'IoT & Data' },
+};
+---
+
+<section id="projects" class="py-28 px-6 md:px-16 xl:px-24" style="background: var(--color-cream);">
+  <div class="max-w-[1280px] mx-auto">
+
+    <h2 class="font-display font-extrabold text-[clamp(32px,5vw,52px)] leading-[1.05] mb-10" style="color: var(--color-text-dark);">
+      <span data-fr>Projets récents</span><span data-en>Recent projects</span>
+    </h2>
+
+    <!-- Tag filter -->
+    <div id="tag-filters" class="flex flex-wrap gap-2 mb-9" role="group" aria-label="Filtrer par type">
+      {PROJECT_TAGS.map(tag => {
+        const label = tagLabels[tag];
+        return (
+          <button
+            data-tag={tag}
+            class="tag-btn px-3.5 py-1.5 rounded-full font-mono text-[11px] cursor-pointer border transition-all duration-200"
+            aria-pressed={tag === 'Tous' ? 'true' : 'false'}
+          >
+            {label ? (
+              <><span data-fr>{label.fr}</span><span data-en>{label.en}</span></>
+            ) : tag}
+          </button>
+        );
+      })}
+    </div>
+
+    <!-- Grid -->
+    <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      {PROJECTS.map(project => (
+        <article
+          data-project
+          data-tags={project.tags.join(',')}
+          class="project-card rounded-lg overflow-hidden bg-white cursor-pointer transition-all duration-300"
+          style="box-shadow: 0 2px 12px rgba(0,0,0,0.06);"
+        >
+          <div class="relative overflow-hidden h-[180px]">
+            <img
+              src={project.img}
+              alt={project.title}
+              class="w-full h-full object-cover transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="project-hover-overlay absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200" style="background: oklch(55% 0.22 260 / 0.85);">
+              <span class="font-mono text-[12px] text-white">
+                {project.url
+                  ? <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-white no-underline"><span data-fr>Voir le site <span aria-hidden="true">→</span></span><span data-en>View site <span aria-hidden="true">→</span></span></a>
+                  : <span data-fr>Projet client <span aria-hidden="true">→</span></span>
+                }
+              </span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display font-bold text-[16px] mb-1" style="color: var(--color-text-dark);">{project.title}</h3>
+            <p class="text-[13px] leading-[1.4] mb-2.5" style="color: var(--color-muted);">
+              <span data-fr>{project.fr}</span>
+              <span data-en>{project.en}</span>
+            </p>
+            <div class="flex flex-wrap gap-1">
+              {project.tags.map(tag => (
+                <span class="font-mono text-[9px] tracking-[0.5px] px-1.5 py-0.5 rounded-full" style="background: oklch(55% 0.22 260 / 0.08); color: var(--color-accent);">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tag-btn {
+    background: transparent;
+    border-color: #d4d0c8;
+    color: var(--color-muted);
+  }
+  .tag-btn[aria-pressed="true"] {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12) !important;
+  }
+  .project-card:hover img { transform: scale(1.05); }
+  .project-card:hover .project-hover-overlay { opacity: 1; }
+</style>
+
+<script>
+  const filters = document.getElementById('tag-filters')!;
+  const grid    = document.getElementById('projects-grid')!;
+
+  filters.addEventListener('click', e => {
+    const btn = (e.target as HTMLElement).closest('[data-tag]') as HTMLButtonElement | null;
+    if (!btn) return;
+
+    const tag = btn.dataset.tag!;
+    filters.querySelectorAll('[data-tag]').forEach(b => (b as HTMLButtonElement).setAttribute('aria-pressed', 'false'));
+    btn.setAttribute('aria-pressed', 'true');
+
+    grid.querySelectorAll<HTMLElement>('[data-project]').forEach(card => {
+      const tags    = card.dataset.tags?.split(',') ?? [];
+      const visible = tag === 'Tous' || tags.includes(tag);
+      card.style.display = visible ? '' : 'none';
+    });
+  });
+</script>
