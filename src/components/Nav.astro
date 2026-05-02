@@ -20,7 +20,7 @@
   </ul>
 
   <div class="flex items-center gap-2.5">
-    <div id="nav-available" class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border nav-reveal" style="background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.25); animation: glowPulse 2s ease-in-out infinite;">
+    <div id="nav-available" class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border nav-reveal nav-available">
       <span class="w-1.5 h-1.5 rounded-full bg-green-400 inline-block"></span>
       <span class="font-mono text-[9px] text-green-400"><span data-fr>Disponible</span><span data-en>Available</span></span>
     </div>
@@ -37,10 +37,10 @@
     <a
       href="https://www.linkedin.com/in/quentin-anvo"
       target="_blank"
-      rel="noreferrer"
-      class="px-4 py-[7px] rounded bg-[var(--color-accent)] text-white font-display font-bold text-sm no-underline hover:opacity-90 transition-opacity"
+      rel="noopener noreferrer"
+      class="px-4 py-2 rounded bg-[var(--color-accent)] text-white font-display font-bold text-sm no-underline hover:opacity-90 transition-opacity"
     >
-      LinkedIn →
+      LinkedIn <span aria-hidden="true">→</span>
     </a>
   </div>
 </nav>
@@ -66,6 +66,12 @@
     pointer-events: auto;
   }
 
+  .nav-available {
+    background: rgba(34,197,94,0.08);
+    border-color: rgba(34,197,94,0.25);
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
   .lang-btn {
     background: transparent;
     color: rgba(255,255,255,0.4);
@@ -83,7 +89,7 @@
   const html       = document.documentElement;
   const revealEls  = nav.querySelectorAll<HTMLElement>('.nav-reveal');
 
-  function setLang(lang: string) {
+  function setLang(lang: 'fr' | 'en') {
     html.dataset.lang = lang;
     html.lang         = lang;
     localStorage.setItem('lang', lang);
@@ -97,8 +103,11 @@
     btn.addEventListener('click', () => setLang(btn.dataset.langBtn!));
   });
 
+  let wasScrolled = false;
   window.addEventListener('scroll', () => {
     const scrolled = window.scrollY > 80;
+    if (scrolled === wasScrolled) return;
+    wasScrolled = scrolled;
     Object.assign(nav.style, {
       background:     scrolled ? 'rgba(7,9,15,0.92)'                : 'transparent',
       backdropFilter: scrolled ? 'blur(16px)'                       : 'none',
@@ -107,6 +116,7 @@
     revealEls.forEach(el => el.classList.toggle('visible', scrolled));
   }, { passive: true });
 
-  const saved = localStorage.getItem('lang') ?? 'fr';
+  const raw = localStorage.getItem('lang');
+  const saved: 'fr' | 'en' = raw === 'en' ? 'en' : 'fr';
   setLang(saved);
 </script>
