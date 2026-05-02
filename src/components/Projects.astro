@@ -1,119 +1,122 @@
 ---
-import { PROJECTS, PROJECT_TAGS } from '../data/projects';
-
-const tagLabels: Record<string, { fr: string; en: string }> = {
-  'Tous':               { fr: 'Tous',               en: 'All' },
-  'Site web':           { fr: 'Site web',            en: 'Website' },
-  'Application métier': { fr: 'Application métier',  en: 'Business app' },
-  'IoT & Data':         { fr: 'IoT & Data',          en: 'IoT & Data' },
-};
+import { PROJECTS } from '../data/projects';
 ---
 
 <section id="projects" class="py-14 md:py-28 px-6 md:px-16 xl:px-24" style="background: var(--color-cream);">
   <div class="max-w-[1280px] mx-auto">
 
-    <h2 class="font-mono font-bold tracking-[0.25em] uppercase mb-10" style="color: var(--color-accent); font-size: clamp(11px, 1.1vw, 14px);">
+    <h2 class="font-mono font-bold tracking-[0.25em] uppercase mb-8" style="color: var(--color-accent); font-size: clamp(11px, 1.1vw, 14px);">
       <span data-fr>Projets récents</span><span data-en>Recent projects</span>
     </h2>
 
-    <!-- Tag filter -->
-    <div id="tag-filters" class="flex flex-wrap gap-2 mb-9" role="group" aria-label="Filtrer par type">
-      {PROJECT_TAGS.map(tag => {
-        const label = tagLabels[tag];
-        return (
-          <button
-            data-tag={tag}
-            class="tag-btn px-3.5 py-1.5 rounded-full font-mono text-[11px] cursor-pointer border transition-all duration-200"
-            aria-pressed={tag === 'Tous' ? 'true' : 'false'}
-          >
-            {label ? (
-              <><span data-fr>{label.fr}</span><span data-en>{label.en}</span></>
-            ) : tag}
-          </button>
-        );
-      })}
-    </div>
-
-    <!-- Grid -->
-    <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+    <div
+      id="carousel-track"
+      class="flex gap-5 overflow-x-auto snap-x snap-mandatory"
+      style="scrollbar-width: none; -ms-overflow-style: none;"
+    >
       {PROJECTS.map(project => (
         <article
-          data-project
-          data-tags={project.tags.join(',')}
-          class="project-card rounded-lg overflow-hidden bg-white cursor-pointer transition-all duration-300"
-          style="box-shadow: 0 2px 12px rgba(0,0,0,0.06);"
+          class="carousel-card snap-start flex-shrink-0 rounded-xl overflow-hidden bg-white w-[85vw] sm:w-[340px]"
+          style="box-shadow: 0 2px 16px rgba(0,0,0,0.06);"
         >
-          <div class="relative overflow-hidden h-[180px]">
+          <div class="relative overflow-hidden h-[200px]">
             <img
               src={project.img}
               alt={project.title}
-              class="w-full h-full object-cover transition-transform duration-500"
+              class="card-img w-full h-full object-cover transition-transform duration-500"
               loading="lazy"
             />
-            <div class="project-hover-overlay absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200" style="background: oklch(55% 0.22 260 / 0.85);">
-              <span class="font-mono text-[12px] text-white">
-                {project.url
-                  ? <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-white no-underline"><span data-fr>Voir le site <span aria-hidden="true">→</span></span><span data-en>View site <span aria-hidden="true">→</span></span></a>
-                  : <span data-fr>Projet client <span aria-hidden="true">→</span></span>
-                }
-              </span>
-            </div>
+            {project.url && (
+              <div class="card-overlay absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200" style="background: oklch(55% 0.22 260 / 0.85);">
+                <a href={project.url} target="_blank" rel="noopener noreferrer" class="font-mono text-[12px] text-white no-underline">
+                  <span data-fr>Voir le site <span aria-hidden="true">→</span></span>
+                  <span data-en>View site <span aria-hidden="true">→</span></span>
+                </a>
+              </div>
+            )}
           </div>
-          <div class="p-4">
-            <h3 class="font-display font-bold text-[16px] mb-1" style="color: var(--color-text-dark);">{project.title}</h3>
-            <p class="text-[13px] leading-[1.4] mb-2.5" style="color: var(--color-muted);">
+          <div class="p-5">
+            <span class="font-mono text-[9px] tracking-[0.5px] px-1.5 py-0.5 rounded-full inline-block mb-3" style="background: oklch(55% 0.22 260 / 0.08); color: var(--color-accent);">
+              {project.tags[0]}
+            </span>
+            <h3 class="font-display font-bold text-[17px] mb-1.5" style="color: var(--color-text-dark);">{project.title}</h3>
+            <p class="text-[13px] leading-[1.5]" style="color: var(--color-muted);">
               <span data-fr>{project.fr}</span>
               <span data-en>{project.en}</span>
             </p>
-            <div class="flex flex-wrap gap-1">
-              {project.tags.map(tag => (
-                <span class="font-mono text-[9px] tracking-[0.5px] px-1.5 py-0.5 rounded-full" style="background: oklch(55% 0.22 260 / 0.08); color: var(--color-accent);">
-                  {tag}
-                </span>
-              ))}
-            </div>
           </div>
         </article>
       ))}
+    </div>
+
+    <div class="flex items-center justify-between mt-6">
+      <span id="carousel-counter" class="font-mono text-[11px]" style="color: var(--color-muted);">1 / {PROJECTS.length}</span>
+      <div class="flex gap-2">
+        <button id="carousel-prev" class="carousel-btn w-9 h-9 rounded-full border flex items-center justify-center transition-all" aria-label="Précédent">←</button>
+        <button id="carousel-next" class="carousel-btn w-9 h-9 rounded-full border flex items-center justify-center transition-all" aria-label="Suivant">→</button>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .tag-btn {
+  #carousel-track::-webkit-scrollbar { display: none; }
+
+  .carousel-card:hover .card-img    { transform: scale(1.04); }
+  .carousel-card:hover .card-overlay { opacity: 1; }
+
+  .carousel-btn {
     background: transparent;
     border-color: #d4d0c8;
     color: var(--color-muted);
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1;
+    cursor: pointer;
   }
-  .tag-btn[aria-pressed="true"] {
+  .carousel-btn:hover:not(:disabled) {
     background: var(--color-accent);
     border-color: var(--color-accent);
     color: #fff;
   }
-  .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12) !important;
-  }
-  .project-card:hover img { transform: scale(1.05); }
-  .project-card:hover .project-hover-overlay { opacity: 1; }
+  .carousel-btn:disabled { opacity: 0.25; cursor: default; }
 </style>
 
 <script>
-  const filters = document.getElementById('tag-filters')!;
-  const grid    = document.getElementById('projects-grid')!;
+  const track   = document.getElementById('carousel-track')!;
+  const cards   = [...track.querySelectorAll<HTMLElement>('.carousel-card')];
+  const total   = cards.length;
+  const counter = document.getElementById('carousel-counter')!;
+  const prev    = document.getElementById('carousel-prev') as HTMLButtonElement;
+  const next    = document.getElementById('carousel-next') as HTMLButtonElement;
+  let current   = 0;
 
-  filters.addEventListener('click', e => {
-    const btn = (e.target as HTMLElement).closest('[data-tag]') as HTMLButtonElement | null;
-    if (!btn) return;
+  function go(index: number) {
+    current = Math.max(0, Math.min(index, total - 1));
+    const { left: cardLeft } = cards[current].getBoundingClientRect();
+    const { left: trackLeft } = track.getBoundingClientRect();
+    track.scrollTo({ left: cardLeft - trackLeft + track.scrollLeft, behavior: 'smooth' });
+    sync();
+  }
 
-    const tag = btn.dataset.tag!;
-    filters.querySelectorAll('[data-tag]').forEach(b => (b as HTMLButtonElement).setAttribute('aria-pressed', 'false'));
-    btn.setAttribute('aria-pressed', 'true');
+  function sync() {
+    counter.textContent = `${current + 1} / ${total}`;
+    prev.disabled = current === 0;
+    next.disabled = current === total - 1;
+  }
 
-    grid.querySelectorAll<HTMLElement>('[data-project]').forEach(card => {
-      const tags    = card.dataset.tags?.split(',') ?? [];
-      const visible = tag === 'Tous' || tags.includes(tag);
-      card.style.display = visible ? '' : 'none';
-    });
-  });
+  prev.addEventListener('click', () => go(current - 1));
+  next.addEventListener('click', () => go(current + 1));
+
+  let scrollTimer: ReturnType<typeof setTimeout>;
+  track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const step = track.scrollWidth / total;
+      const i = Math.min(total - 1, Math.round(track.scrollLeft / step));
+      if (i !== current) { current = i; sync(); }
+    }, 120);
+  }, { passive: true });
+
+  sync();
 </script>
