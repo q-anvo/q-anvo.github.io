@@ -5,20 +5,21 @@ import { SERVICES } from '../data/services';
 <section id="services" class="py-20 md:py-36 px-6 md:px-16 xl:px-24" style="background: var(--color-bg);">
   <div class="max-w-[1280px] mx-auto">
 
-    <h2 class="font-mono font-bold tracking-[0.25em] uppercase mb-16" style="color: var(--color-accent); font-size: clamp(11px, 1.1vw, 14px);">
+    <h2 class="font-mono font-bold tracking-[0.25em] uppercase mb-16" style="color: var(--color-accent); font-size: clamp(13px, 1.5vw, 18px);">
       <span data-fr>Ce que je fais</span><span data-en>What I do</span>
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div
+      id="services-cards"
+      class="flex md:grid md:grid-cols-3 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none"
+      style="scrollbar-width: none; -ms-overflow-style: none;"
+    >
       {SERVICES.map(service => (
-        <div
-          class="service-card group px-8 md:px-12 py-10 md:py-16 cursor-default transition-all duration-300 rounded-sm"
-          style="background: var(--color-surface);"
-        >
+        <div class="service-card snap-start flex-shrink-0 w-[85vw] md:w-auto px-8 md:px-12 py-10 md:py-16 cursor-default rounded-xl">
           <div class="text-[28px] mb-5" style="color: var(--color-accent);">
             {service.icon}
           </div>
-          <h3 class="font-display font-bold text-[22px] text-white mb-3 leading-[1.2]">
+          <h3 class="font-display font-bold text-[22px] text-white mb-4 leading-[1.2]">
             <span data-fr>{service.fr.title}</span>
             <span data-en>{service.en.title}</span>
           </h3>
@@ -33,14 +34,19 @@ import { SERVICES } from '../data/services';
 </section>
 
 <style>
+  #services-cards::-webkit-scrollbar { display: none; }
+
   .service-card {
-    border-top: 2px solid transparent;
-    transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+    background: var(--color-surface);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-top: 3px solid transparent;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    transition: border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
   }
   .service-card:hover {
     border-top-color: var(--color-accent);
-    background: var(--color-surface-alt) !important;
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    background: var(--color-surface-alt);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5);
   }
 </style>
