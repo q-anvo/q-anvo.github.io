@@ -1,0 +1,425 @@
+---
+import { PROJECTS, PROJECT_TAGS } from '../data/projects';
+
+const projectsJson = JSON.stringify(PROJECTS.map(p => ({
+  id:    p.id,
+  title: p.title,
+  fr:    p.fr,
+  en:    p.en,
+  tag:   p.tags[0],
+  img:   p.img,
+  url:   p.url ?? null,
+  host:  p.host ?? p.id + '.app',
+})));
+---
+
+<section id="projects" class="projects-section">
+  <div class="projects-container">
+
+    <header class="section-head">
+      <div class="projects-kicker">
+        <span data-fr>Exemples de projets</span>
+        <span data-en>Project examples</span>
+      </div>
+      <h2 class="projects-title">
+        <span data-fr>Ce que j'ai livré, ces derniers temps.</span>
+        <span data-en>What I've shipped, lately.</span>
+      </h2>
+      <div class="project-filters" id="project-filters">
+        <button class="pf is-active" data-tag="Tous"><span data-fr>Tous</span><span data-en>All</span></button>
+        <button class="pf" data-tag="Site web"><span data-fr>Sites web</span><span data-en>Websites</span></button>
+        <button class="pf" data-tag="Application métier"><span data-fr>Applications métier</span><span data-en>Business apps</span></button>
+        <button class="pf" data-tag="IoT & Data">IoT &amp; Data</button>
+      </div>
+    </header>
+
+    <div class="carousel" id="carousel">
+      <button class="carousel-arrow carousel-prev" aria-label="Précédent">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="carousel-track"></div>
+      </div>
+      <button class="carousel-arrow carousel-next" aria-label="Suivant">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <div class="carousel-counter" id="carousel-counter">01 / 08</div>
+    </div>
+
+  </div>
+</section>
+
+<script define:vars={{ projectsJson }}>
+  const PROJECTS = JSON.parse(projectsJson);
+  const $ = s => document.querySelector(s);
+  const $$ = s => document.querySelectorAll(s);
+
+  let state = { current: 0, list: PROJECTS };
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function safeUrl(url) {
+    return typeof url === 'string' && url.startsWith('https://') ? url : '#';
+  }
+
+  function buildCard(p) {
+    const initials = esc(p.title.split(' ').map(w => w[0]).slice(0, 2).join(''));
+    return `
+      <div class="carousel-slide">
+        <article class="project-card">
+          <div class="project-window">
+            <div class="project-window-chrome">
+              <div class="project-traffic"><span></span><span></span><span></span></div>
+              <div class="project-host">${esc(p.host)}</div>
+            </div>
+            <div class="project-thumb">
+              <img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy" />
+              <div class="project-thumb-glow"></div>
+              <div class="project-thumb-fallback">${initials}</div>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags"><span class="project-tag">${esc(p.tag)}</span></div>
+            <h3 class="project-title">${esc(p.title)}</h3>
+            <p class="project-desc" data-fr-text="${esc(p.fr)}" data-en-text="${esc(p.en)}">${esc(p.fr)}</p>
+            ${p.url ? `<a href="${safeUrl(p.url)}" target="_blank" rel="noopener noreferrer" class="project-link">
+              <span data-fr>Voir le projet</span><span data-en>View project</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>` : ''}
+          </div>
+        </article>
+      </div>`;
+  }
+
+  function renderCarousel(filter = 'Tous') {
+    state.list = filter === 'Tous' ? PROJECTS : PROJECTS.filter(p => p.tag === filter);
+    const track  = $('#carousel-track');
+    const dotsEl = $('#carousel-dots');
+    track.innerHTML  = state.list.map(buildCard).join('');
+    dotsEl.innerHTML = state.list.map((_, i) =>
+      `<button class="carousel-dot" data-idx="${i}" aria-label="Projet ${i + 1}"></button>`
+    ).join('');
+    state.current = 0;
+    goToSlide(0);
+
+    const lang = document.documentElement.dataset.lang || 'fr';
+    syncLang(lang);
+  }
+
+  function goToSlide(idx) {
+    const total = state.list.length;
+    if (total === 0) return;
+    state.current = ((idx % total) + total) % total;
+    $('#carousel-track').style.transform = `translateX(-${state.current * 100}%)`;
+    $$('.carousel-dot').forEach((d, i) => d.classList.toggle('is-active', i === state.current));
+    $('#carousel-counter').textContent =
+      String(state.current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+  }
+
+  function syncLang(lang) {
+    $$('.project-desc').forEach(el => {
+      el.textContent = lang === 'en' ? el.dataset.enText : el.dataset.frText;
+    });
+  }
+
+  $$('.pf').forEach(btn => btn.addEventListener('click', () => {
+    $$('.pf').forEach(b => b.classList.toggle('is-active', b === btn));
+    renderCarousel(btn.dataset.tag);
+  }));
+
+  $('.carousel-prev').addEventListener('click', () => goToSlide(state.current - 1));
+  $('.carousel-next').addEventListener('click', () => goToSlide(state.current + 1));
+
+  $('#carousel-dots').addEventListener('click', e => {
+    const dot = e.target.closest('.carousel-dot');
+    if (dot) goToSlide(+dot.dataset.idx);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  goToSlide(state.current - 1);
+    if (e.key === 'ArrowRight') goToSlide(state.current + 1);
+  });
+
+  (() => {
+    const vp = $('.carousel-viewport');
+    if (!vp) return;
+    let startX = 0;
+    vp.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    vp.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) < 50) return;
+      goToSlide(state.current + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  })();
+
+  document.addEventListener('langchange', e => syncLang(e.detail));
+
+  renderCarousel();
+</script>
+
+<style is:global>
+  .projects-section {
+    background: var(--color-bg);
+    padding: clamp(56px, 8vw, 120px) 0;
+  }
+
+  .projects-container {
+    width: 100%;
+    max-width: clamp(1100px, 88vw, 1500px);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 64px);
+  }
+
+  .section-head { margin-bottom: 40px; }
+
+  .projects-kicker {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 0.85vw, 14px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+  }
+
+  .projects-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(26px, 3.5vw, 54px);
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .project-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pf {
+    font-family: var(--font-mono);
+    font-size: clamp(12px, 0.9vw, 15px);
+    padding: 7px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.55);
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+  .pf:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
+  .pf.is-active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+
+  .carousel { position: relative; }
+
+  .carousel-viewport {
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+  }
+
+  .project-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--color-surface);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    overflow: hidden;
+    min-height: 340px;
+  }
+
+  @media (max-width: 767px) {
+    .project-card {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+  }
+
+  .project-window {
+    display: flex;
+    flex-direction: column;
+    background: #1e1e2e;
+  }
+
+  .project-window-chrome {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #14151f;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    flex-shrink: 0;
+  }
+
+  .project-traffic {
+    display: flex;
+    gap: 5px;
+  }
+  .project-traffic span {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .project-traffic span:nth-child(1) { background: #ff5f57; }
+  .project-traffic span:nth-child(2) { background: #febc2e; }
+  .project-traffic span:nth-child(3) { background: #28c840; }
+
+  .project-host {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .project-thumb {
+    flex: 1;
+    position: relative;
+    min-height: 200px;
+    background: var(--color-surface);
+    overflow: hidden;
+  }
+  .project-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .project-thumb-glow {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(80,90,200,0.15), transparent 60%);
+    pointer-events: none;
+  }
+  .project-thumb-fallback {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 800; font-size: 48px;
+    color: rgba(255,255,255,0.06);
+    pointer-events: none;
+  }
+  .project-thumb img:not([src]),
+  .project-thumb img[src=""] { display: none; }
+
+  .project-body {
+    padding: clamp(24px, 3vw, 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .project-tags { display: flex; gap: 6px; }
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 0.75vw, 13px);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background: oklch(55% 0.22 260 / 0.12);
+    border: 1px solid oklch(55% 0.22 260 / 0.25);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .project-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(22px, 2.7vw, 42px);
+    color: #fff;
+    line-height: 1.15;
+  }
+
+  .project-desc {
+    font-size: clamp(14px, 1.1vw, 18px);
+    line-height: 1.7;
+    color: rgba(255,255,255,0.55);
+    max-width: 380px;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: clamp(12px, 0.9vw, 15px);
+    color: var(--color-accent);
+    text-decoration: none;
+    border: 1px solid oklch(55% 0.22 260 / 0.35);
+    padding: 9px 18px;
+    border-radius: 999px;
+    width: fit-content;
+    transition: background 0.2s, border-color 0.2s;
+    margin-top: 4px;
+  }
+  .project-link:hover {
+    background: oklch(55% 0.22 260 / 0.12);
+    border-color: oklch(65% 0.22 260 / 0.6);
+  }
+  .project-link svg { width: 14px; height: 14px; }
+
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+  .carousel-arrow:hover { background: rgba(13,17,23,1); color: #fff; }
+  .carousel-arrow svg { width: 18px; height: 18px; }
+  .carousel-prev { left: -22px; }
+  .carousel-next { right: -22px; }
+
+  @media (max-width: 900px) {
+    .carousel-prev { left: 8px; }
+    .carousel-next { right: 8px; }
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 20px;
+  }
+
+  .carousel-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: background 0.25s, transform 0.25s;
+    cursor: pointer;
+    padding: 0; border: 0;
+  }
+  .carousel-dot.is-active {
+    background: var(--color-accent);
+    transform: scale(1.4);
+  }
+
+  .carousel-counter {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 0.85vw, 14px);
+    color: rgba(255,255,255,0.3);
+    margin-top: 8px;
+  }
+</style>

@@ -1,0 +1,336 @@
+---
+const TECH_CATEGORIES = [
+  { id: 'frontend',  label: 'Frontend & Design' },
+  { id: 'backend',   label: 'Backend & Architecture' },
+  { id: 'infra',     label: 'Infra, DevOps & Tools' },
+  { id: 'funfacts',  label: 'Fun facts' },
+];
+
+const TECH_STACK = [
+  { name: 'HTML / CSS',   cat: 'frontend', s: 'solid'     },
+  { name: 'Tailwind CSS', cat: 'frontend', s: 'solid'     },
+  { name: 'JavaScript',   cat: 'frontend', s: 'solid'     },
+  { name: 'Astro',        cat: 'frontend', s: 'solid'     },
+  { name: 'TypeScript',   cat: 'frontend', s: 'learning'  },
+  { name: 'React',        cat: 'frontend', s: 'learning'  },
+  { name: 'PHP',          cat: 'backend',  s: 'mastered'  },
+  { name: 'Laravel',      cat: 'backend',  s: 'mastered'  },
+  { name: 'Python',       cat: 'backend',  s: 'solid'     },
+  { name: 'Node.js',      cat: 'backend',  s: 'exploring' },
+  { name: 'Go',           cat: 'backend',  s: 'exploring' },
+  { name: 'Rust',         cat: 'backend',  s: 'exploring' },
+  { name: 'Linux',        cat: 'infra',    s: 'mastered'  },
+  { name: 'Git',          cat: 'infra',    s: 'mastered'  },
+  { name: 'CI / CD',      cat: 'infra',    s: 'mastered'  },
+  { name: 'Docker',       cat: 'infra',    s: 'solid'     },
+  { name: 'Nginx',        cat: 'infra',    s: 'solid'     },
+  { name: 'Figma',        cat: 'infra',    s: 'solid'     },
+  { name: 'Cloudflare',   cat: 'infra',    s: 'learning'  },
+  { name: 'n8n',          cat: 'infra',    s: 'learning'  },
+  { name: 'PR sans drama',              cat: 'funfacts', s: 'solid'     },
+  { name: 'deploy un vendredi (ça passe)', cat: 'funfacts', s: 'learning'  },
+  { name: 'migration sans sueur',       cat: 'funfacts', s: 'solid'     },
+  { name: 'git blame → git praise',     cat: 'funfacts', s: 'mastered'  },
+  { name: 'merge request propre',       cat: 'funfacts', s: 'solid'     },
+  { name: 'README à jour',              cat: 'funfacts', s: 'solid'     },
+  { name: '0 TODO en prod',             cat: 'funfacts', s: 'mastered'  },
+  { name: 'commit message clair',       cat: 'funfacts', s: 'mastered'  },
+  { name: 'code review bienveillante',  cat: 'funfacts', s: 'solid'     },
+  { name: 'hotfix ? connais pas',       cat: 'funfacts', s: 'exploring' },
+  { name: 'tests verts ✓',             cat: 'funfacts', s: 'mastered'  },
+  { name: 'backlog priorisé',           cat: 'funfacts', s: 'solid'     },
+  { name: 'MVP livré dans les temps',   cat: 'funfacts', s: 'solid'     },
+  { name: 'dark mode natif',            cat: 'funfacts', s: 'learning'  },
+  { name: 'dette technique assumée',    cat: 'funfacts', s: 'exploring' },
+  { name: '🎯 Hit 3 times',            cat: 'funfacts', s: 'hit'       },
+];
+---
+
+<section id="about" class="about-section">
+  <div class="about-container">
+
+    <header class="about-head">
+      <div class="section-kicker-about">
+        <span data-fr>À propos</span>
+        <span data-en>About</span>
+      </div>
+      <h2 class="about-title">
+        <span data-fr>Voici ce que je maîtrise.</span>
+        <span data-en>Here's what I master.</span>
+      </h2>
+    </header>
+
+    <div class="techstack-legend">
+      <span class="legend-item legend-mastered">
+        <span data-fr>Maîtrisé</span><span data-en>Mastered</span>
+      </span>
+      <span class="legend-item legend-solid">
+        <span data-fr>Solide</span><span data-en>Solid</span>
+      </span>
+      <span class="legend-item legend-learning">
+        <span data-fr>En progression</span><span data-en>Learning</span>
+      </span>
+      <span class="legend-item legend-exploring">
+        <span data-fr>Exploration</span><span data-en>Exploring</span>
+      </span>
+    </div>
+
+    <div class="techstack-tickers">
+      {TECH_CATEGORIES.map((cat, ci) => {
+        const items = TECH_STACK.filter(t => t.cat === cat.id);
+        const track = [...items, ...items, ...items, ...items];
+        return (
+          <div class="ticker-group">
+            <h3 class="ticker-cat-title">{cat.label}</h3>
+            <div class="ticker-overflow">
+              <div class={`ticker-track ${ci % 2 === 1 ? 'ticker-track--rtl' : ''}`}>
+                {track.map(t => (
+                  <span class={`tech-badge tech-badge--${t.s}`}>{t.name}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <div class="easter-block">
+      <div class="easter-glyph">
+        <img src="/assets/avatar.png" alt="Quentin Anvo" class="easter-avatar" />
+      </div>
+      <div class="easter-content">
+        <div class="easter-pre">
+          <span data-fr>Vous avez un projet ?</span>
+          <span data-en>Got a project?</span>
+        </div>
+        <p class="easter-phrase">
+          <span data-fr>Travaillons ensemble.</span>
+          <span data-en>Let's work together.</span>
+        </p>
+        <p class="easter-desc">
+          <span data-fr>Je serais ravi d'échanger sur votre projet et de voir comment je peux vous aider à le concrétiser.</span>
+          <span data-en>I'd love to discuss your project and see how I can help bring it to life.</span>
+        </p>
+        <p class="easter-hint">
+          <span data-fr>Pour en savoir plus sur moi, toute info perso se mérite —
+            <span class="easter-accent">cherchez l'easter egg</span>.
+          </span>
+          <span data-en>To know more about me, personal info is earned —
+            <span class="easter-accent">find the easter egg</span>.
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <div class="about-ctas">
+      <a href="mailto:quentin.anvo@live.fr" class="cta cta-primary">
+        <span data-fr>Me contacter</span>
+        <span data-en>Get in touch</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/quentin-anvo" target="_blank" rel="noopener noreferrer" class="cta cta-ghost">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .about-section {
+    background: var(--color-bg);
+    padding: clamp(56px, 8vw, 120px) 0;
+  }
+
+  .about-container {
+    width: 100%;
+    max-width: clamp(1100px, 88vw, 1500px);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 64px);
+  }
+
+  .about-head { margin-bottom: 32px; }
+
+  .section-kicker-about {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 0.85vw, 14px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+  }
+
+  .about-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(26px, 3.5vw, 54px);
+    color: #fff;
+    line-height: 1.15;
+  }
+
+  /* Tech stack legend */
+  .techstack-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .legend-item {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 1vw, 16px);
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+  }
+  .legend-mastered  { background: oklch(55% 0.22 260 / 0.18); color: var(--color-accent); border: 1px solid oklch(55% 0.22 260 / 0.4); }
+  .legend-solid     { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.15); }
+  .legend-learning  { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+  .legend-exploring { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.08); }
+
+  /* Tech stack tickers */
+  .techstack-tickers {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-bottom: 48px;
+  }
+
+  .ticker-group { display: flex; flex-direction: column; gap: 12px; }
+
+  .ticker-cat-title {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 1.1vw, 18px);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .ticker-overflow {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 8px;
+    width: max-content;
+    animation: tickLtr 30s linear infinite;
+  }
+
+  .ticker-track--rtl { animation: tickRtl 30s linear infinite; }
+
+  @keyframes tickLtr { from { transform: translateX(0); }    to { transform: translateX(-25%); } }
+  @keyframes tickRtl { from { transform: translateX(-25%); } to { transform: translateX(0); } }
+
+  .tech-badge {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 1.2vw, 20px);
+    padding: 4px 11px;
+    border-radius: 999px;
+  }
+  .tech-badge--mastered  { background: oklch(55% 0.22 260 / 0.18); color: var(--color-accent); border: 1px solid oklch(55% 0.22 260 / 0.35); }
+  .tech-badge--solid     { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.12); }
+  .tech-badge--learning  { background: rgba(251,191,36,0.08); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+  .tech-badge--exploring { background: transparent; color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.07); }
+  .tech-badge--hit       { background: transparent; color: #ef4444; border: 1px solid #ef4444; font-weight: 700; letter-spacing: 0.05em; }
+
+  /* Easter egg block */
+  .easter-block {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 18px;
+    padding: clamp(24px, 3vw, 36px);
+    margin-bottom: 36px;
+    backdrop-filter: blur(8px);
+  }
+  @media (max-width: 600px) {
+    .easter-block { flex-direction: column; gap: 16px; }
+  }
+
+  .easter-glyph {
+    width: 56px; height: 56px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .easter-avatar { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .easter-content { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+
+  .easter-pre {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .easter-phrase {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(18px, 3vw, 48px);
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .easter-desc {
+    font-size: clamp(14px, 1.5vw, 24px);
+    line-height: 1.7;
+    color: rgba(255,255,255,0.55);
+    max-width: 540px;
+  }
+
+  .easter-hint {
+    font-size: clamp(13px, 1.4vw, 22px);
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+  }
+
+  .easter-accent {
+    color: var(--color-accent);
+    font-style: italic;
+  }
+
+  /* CTAs */
+  .about-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(14px, 1.5vw, 24px);
+    padding: 13px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .cta:hover { opacity: 0.88; transform: translateY(-1px); }
+  .cta svg { width: 16px; height: 16px; }
+
+  .cta-primary {
+    background: var(--color-accent);
+    color: #fff;
+    box-shadow: 0 8px 24px oklch(55% 0.22 260 / 0.35);
+  }
+
+  .cta-ghost {
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .cta-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+</style>
