@@ -1,0 +1,244 @@
+---
+import '../styles/hero.css';
+---
+
+<section class="process-section" id="process">
+  <div class="hero-wrapper">
+
+    <div class="hero-split" id="hero-split">
+
+      <!-- Mobile phase toast -->
+      <div class="phase-toast" id="phase-toast" aria-live="polite">
+        <span class="phase-toast-num">01</span>
+        <span class="phase-toast-name">Brief</span>
+      </div>
+
+      <!-- LEFT — phase panes ──────────────────────────────────────────────── -->
+      <div class="left">
+        <div class="phase-bar">
+          <span data-ph="0" class="is-on"></span>
+          <span data-ph="1"></span>
+          <span data-ph="2"></span>
+          <span data-ph="3"></span>
+        </div>
+
+        <div class="pane chat-pane is-active" data-pane="chat">
+          <div class="chat-head">
+            <div class="chat-avatar">M</div>
+            <div class="chat-head-info">
+              <div class="chat-head-name">Marie D.</div>
+              <div class="chat-head-status">En ligne · Bijoutière</div>
+            </div>
+          </div>
+          <div class="chat-body" id="chat-body"></div>
+        </div>
+
+        <div class="pane editor-pane" data-pane="editor">
+          <div class="editor-tabs">
+            <div class="editor-tab"><span class="dot"></span> index.html</div>
+            <div class="editor-tab inactive"><span class="dot"></span> style.css</div>
+          </div>
+          <div class="editor-body">
+            <div class="editor-gutter" id="editor-gutter"></div>
+            <div class="editor-code" id="editor-code"></div>
+          </div>
+          <div class="editor-term" id="editor-term">
+            <div class="editor-term-head">⌃ TERMINAL — bash</div>
+            <div class="editor-term-body" id="editor-term-body"></div>
+          </div>
+          <div class="editor-status">
+            <span>HTML</span>
+            <span>UTF-8</span>
+            <span class="right">Marie Bijoux · main</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — iMac display ─────────────────────────────────────────────── -->
+      <div class="right">
+        <div class="display">
+          <div class="display-screen">
+            <div class="browser">
+              <div class="browser-chrome">
+                <div class="traffic"><span></span><span></span><span></span></div>
+                <div class="browser-nav">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+                </div>
+                <div class="browser-url" id="browser-url">
+                  <svg class="lock" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 00-5 5v3H5v12h14V10h-2V7a5 5 0 00-5-5zm-3 8V7a3 3 0 016 0v3H9z"/></svg>
+                  <span class="url-text" id="url-text">about:blank</span>
+                </div>
+              </div>
+              <div class="browser-content" id="browser-content">
+
+                <div class="site-layer site-off is-active" data-state="off"></div>
+
+                <div class="site-layer site-wire" data-state="wire">
+                  <div class="wire-nav">
+                    <div class="wire-box" style="width:90px;height:14px;"></div>
+                    <div style="display:flex;gap:10px;">
+                      <div class="wire-box" style="width:38px;height:8px;"></div>
+                      <div class="wire-box" style="width:38px;height:8px;"></div>
+                      <div class="wire-box" style="width:38px;height:8px;"></div>
+                    </div>
+                  </div>
+                  <div class="wire-hero">
+                    <div class="wire-box" style="width:50%;height:10px;"></div>
+                    <div class="wire-box" style="width:75%;height:22px;"></div>
+                    <div class="wire-box" style="width:60%;height:10px;"></div>
+                    <div class="wire-box" style="width:30%;height:30px;border-radius:999px;margin-top:8px;"></div>
+                  </div>
+                  <div class="wire-grid">
+                    <div class="wire-box" style="height:120px;"></div>
+                    <div class="wire-box" style="height:120px;"></div>
+                    <div class="wire-box" style="height:120px;"></div>
+                  </div>
+                  <div class="wire-footer">
+                    <div class="wire-box" style="width:80px;height:8px;"></div>
+                    <div class="wire-box" style="width:80px;height:8px;"></div>
+                  </div>
+                </div>
+
+                <div class="site-layer site-mock" data-state="mock">
+                  <div class="mock-nav">
+                    <div class="mock-logo">
+                      <div class="mock-logo-mark">M</div>
+                      <span>Marie D.</span>
+                      <span class="mock-logo-sub">· Bijoutière</span>
+                    </div>
+                    <div class="mock-nav-links">
+                      <a href="#" class="active">Accueil</a>
+                      <a href="#">Créations</a>
+                      <a href="#">Contact</a>
+                    </div>
+                  </div>
+                  <div class="mock-hero">
+                    <div class="mock-hero-eyebrow">Bijouterie artisanale · Caen</div>
+                    <h1 class="mock-hero-title">L'art du bijou fait main</h1>
+                    <p class="mock-hero-sub">Chaque pièce est unique, façonnée à la main dans notre atelier caennais.</p>
+                    <a href="#" class="mock-cta">Voir les créations →</a>
+                  </div>
+                  <div class="mock-grid">
+                    <div class="mock-card">
+                      <div class="mock-card-img b1">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#b8902a" stroke-width="1.5"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                      </div>
+                      <div class="mock-card-body">
+                        <div class="mock-card-title">Bracelets</div>
+                        <div class="mock-card-sub">Or & argent</div>
+                        <div class="mock-card-price">dès 120€</div>
+                      </div>
+                    </div>
+                    <div class="mock-card">
+                      <div class="mock-card-img b2">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#8B6914" stroke-width="1.5"><path d="M12 2v6M8 8h8M10 8l-2 14M14 8l2 14"/></svg>
+                      </div>
+                      <div class="mock-card-body">
+                        <div class="mock-card-title">Colliers</div>
+                        <div class="mock-card-sub">Sur mesure</div>
+                        <div class="mock-card-price">dès 180€</div>
+                      </div>
+                    </div>
+                    <div class="mock-card">
+                      <div class="mock-card-img b3">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#b8902a" stroke-width="1.5"><polygon points="12,3 19,9 16,20 8,20 5,9"/></svg>
+                      </div>
+                      <div class="mock-card-body">
+                        <div class="mock-card-title">Bagues</div>
+                        <div class="mock-card-sub">Collection 2025</div>
+                        <div class="mock-card-price">dès 90€</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mock-band">
+                    <h3>Une création unique, signée Marie</h3>
+                    <p>Plus de 15 ans d'expertise dans la création de bijoux personnalisés.</p>
+                  </div>
+                  <div class="mock-footer">
+                    <span>© 2025 Marie D.</span>
+                    <span class="right">Caen, France</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="display-chin"></div>
+        </div>
+        <div class="display-stand"></div>
+        <div class="display-base"></div>
+      </div>
+
+      <!-- Replay hint ──────────────────────────────────────────────────────── -->
+      <div class="replay" id="replay">
+        <button id="replay-btn">
+          ↻ <span data-fr>rejouer</span><span data-en>replay</span>
+        </button>
+      </div>
+
+      <!-- Celebration popup ────────────────────────────────────────────────── -->
+      <div class="celebrate" id="celebrate" aria-hidden="true">
+        <div class="celebrate-backdrop"></div>
+        <div class="celebrate-card">
+          <div class="celebrate-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12l5 5L20 7"/>
+            </svg>
+          </div>
+          <div class="celebrate-title">
+            <span data-fr>Site en production !</span>
+            <span data-en>Live in production!</span>
+          </div>
+          <div class="celebrate-sub">
+            <span class="dot"></span>
+            <span>marie-bijoux.fr</span>
+          </div>
+        </div>
+      </div>
+      <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+
+    </div>
+
+    <!-- 4 process blocks, revealed in sync with the hero animation -->
+    <ol class="process-row" id="process-row">
+      <li class="process-block" data-block="0">
+        <div class="block-num">01</div>
+        <div class="block-name"><span data-fr>Brief</span><span data-en>Brief</span></div>
+        <p class="block-desc">
+          <span data-fr>On cadre le projet ensemble : objectifs, contraintes, délais.</span>
+          <span data-en>We align on goals, constraints, and timeline.</span>
+        </p>
+      </li>
+      <li class="process-block" data-block="1">
+        <div class="block-num">02</div>
+        <div class="block-name"><span data-fr>Spec</span><span data-en>Spec</span></div>
+        <p class="block-desc">
+          <span data-fr>Je formalise ce qu'on construit. Pas de surprise en route.</span>
+          <span data-en>I document what we build. No surprises along the way.</span>
+        </p>
+      </li>
+      <li class="process-block" data-block="2">
+        <div class="block-num">03</div>
+        <div class="block-name"><span data-fr>Dev</span><span data-en>Dev</span></div>
+        <p class="block-desc">
+          <span data-fr>Code propre et testé. Démos régulières, zéro surprise.</span>
+          <span data-en>Clean, tested code. Regular demos, zero surprises.</span>
+        </p>
+      </li>
+      <li class="process-block" data-block="3">
+        <div class="block-num">04</div>
+        <div class="block-name"><span data-fr>Launch</span><span data-en>Launch</span></div>
+        <p class="block-desc">
+          <span data-fr>Mise en ligne soignée et suivi post-déploiement.</span>
+          <span data-en>Careful deployment and post-launch monitoring.</span>
+        </p>
+      </li>
+    </ol>
+
+  </div>
+</section>
+
+<script>
+  import '../js/hero-animation.js';
+</script>
