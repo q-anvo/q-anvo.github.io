@@ -1,0 +1,240 @@
+---
+---
+
+<nav id="nav" class="site-nav">
+  <div class="nav-inner">
+
+    <!-- Left: logo + Mon univers -->
+    <div class="nav-left">
+      <a id="nav-logo" href="#" class="nav-logo" aria-label="Quentin Anvo — retour en haut">
+        <img src="/assets/avatar.png" alt="Quentin Anvo" class="nav-avatar" />
+        <span class="nav-name">QUENTIN<span class="nav-accent">_</span>ANVO</span>
+      </a>
+      <a id="btn-universe" href="#" class="universe-nav-btn" aria-label="Mode personnel">
+        <span data-fr>✦ Mon univers</span><span data-en>✦ My universe</span>
+      </a>
+    </div>
+
+    <!-- Center: navigation links -->
+    <ul id="nav-links" class="nav-links" role="list">
+      <li><a href="#process"  class="nav-link"><span data-fr>Comment je travaille</span><span data-en>How I work</span></a></li>
+      <li><a href="#services" class="nav-link"><span data-fr>Services</span><span data-en>Services</span></a></li>
+      <li><a href="#projects" class="nav-link"><span data-fr>Projets</span><span data-en>Projects</span></a></li>
+      <li><a href="#about"    class="nav-link"><span data-fr>À propos</span><span data-en>About</span></a></li>
+    </ul>
+
+    <!-- Right: status + lang + icons -->
+    <div class="nav-right">
+      <div id="nav-available" class="nav-status">
+        <span class="nav-status-dot"></span>
+        <span data-fr>Disponible</span><span data-en>Available</span>
+      </div>
+
+      <div id="lang-toggle" class="nav-lang" role="group" aria-label="Langue">
+        <button data-lang-btn="fr" class="lang-btn">FR</button>
+        <button data-lang-btn="en" class="lang-btn">EN</button>
+      </div>
+
+      <a href="https://www.linkedin.com/in/quentin-anvo" target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="LinkedIn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+      </a>
+
+      <a href="https://github.com/q-anvo" target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="GitHub">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<style>
+  :root { --nav-h: 72px; }
+
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    height: var(--nav-h);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    background: rgba(7, 9, 15, 0.65);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .nav-inner {
+    height: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 64px);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: clamp(24px, 5vw, 64px);
+  }
+
+  /* ── Left ── */
+  .nav-left { display: flex; align-items: center; gap: 16px; }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%; object-fit: cover; flex-shrink: 0;
+    border: 1.5px solid rgba(255,255,255,0.15);
+  }
+  .nav-name {
+    font-family: var(--font-mono); font-weight: 700; font-size: 13px;
+    letter-spacing: 0.08em; color: #fff;
+  }
+  .nav-accent { color: var(--color-accent-light); }
+
+  .universe-nav-btn {
+    font-family: var(--font-mono); font-size: 11px;
+    color: oklch(65% 0.22 260);
+    border: 1px solid oklch(55% 0.22 260 / 0.4);
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: oklch(55% 0.22 260 / 0.08);
+    text-decoration: none;
+    opacity: 0; transform: scale(0.7); pointer-events: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .universe-nav-btn:hover {
+    background: oklch(55% 0.22 260 / 0.18);
+    border-color: oklch(65% 0.22 260 / 0.8);
+    color: oklch(80% 0.22 260);
+  }
+
+  /* ── Center ── */
+  .nav-links {
+    display: flex; justify-content: center;
+    gap: clamp(18px, 3vw, 40px);
+    list-style: none; margin: 0; padding: 0;
+  }
+  .nav-link {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative; padding: 4px 0;
+  }
+  .nav-link:hover { color: #fff; }
+  .nav-link::after {
+    content: ''; position: absolute; bottom: -2px; left: 0;
+    height: 1px; width: 0; background: var(--color-accent-light);
+    transition: width 0.25s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  /* ── Right ── */
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+
+  .nav-status {
+    display: flex; align-items: center; gap: 7px;
+    padding: 7px 14px; border-radius: 999px;
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    font-family: var(--font-mono); font-size: 11px; color: #4ade80;
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+  .nav-status-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0;
+  }
+
+  .nav-lang {
+    display: flex;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px; overflow: hidden;
+  }
+  .lang-btn {
+    padding: 6px 10px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: rgba(255,255,255,0.4); background: transparent;
+    border: none; cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .lang-btn:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.1); }
+  .lang-btn.active { background: rgba(255,255,255,0.08); color: #fff; }
+  .lang-btn:hover:not(.active) { color: rgba(255,255,255,0.7); }
+
+  .nav-icon {
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.45); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-icon:hover { color: #fff; }
+
+  /* ── Mobile ── */
+  @media (max-width: 900px) {
+    :root { --nav-h: 96px; }
+    .nav-inner {
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    .nav-left { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .nav-links, .nav-status { display: none; }
+    .nav-right { justify-self: end; align-self: flex-start; padding-top: 4px; }
+  }
+
+  /* ── Universe pop-in ── */
+  @keyframes universePopIn {
+    0%   { opacity: 0; transform: scale(0.6); }
+    60%  { opacity: 1; transform: scale(1.08); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .universe-nav-btn.universe-active {
+    animation: universePopIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    pointer-events: auto;
+  }
+
+  /* ── Universe mode (light theme) ── */
+  [data-universe="true"] .site-nav {
+    background: rgba(255, 243, 224, 0.97);
+    border-bottom-color: rgba(232, 91, 10, 0.12);
+  }
+  [data-universe="true"] .universe-nav-btn {
+    color: #E85B0A;
+    border-color: rgba(232, 91, 10, 0.45);
+    background: rgba(232, 91, 10, 0.08);
+  }
+  [data-universe="true"] .nav-link { color: rgba(30,15,5,0.5); }
+  [data-universe="true"] .nav-link:hover { color: #1A0D05; }
+  [data-universe="true"] .nav-link::after { background: #E85B0A; }
+  [data-universe="true"] .nav-name { color: #1A0D05; }
+  [data-universe="true"] .nav-accent { color: #E85B0A; }
+  [data-universe="true"] .nav-icon { color: rgba(30,15,5,0.4); }
+  [data-universe="true"] .nav-icon:hover { color: #1A0D05; }
+  [data-universe="true"] .lang-btn { color: rgba(30,15,5,0.35); }
+  [data-universe="true"] .lang-btn.active { background: rgba(30,15,5,0.07); color: #1A0D05; }
+  [data-universe="true"] .nav-lang { border-color: rgba(30,15,5,0.12); }
+  [data-universe="true"] .lang-btn:not(:last-child) { border-right-color: rgba(30,15,5,0.1); }
+  [data-universe="true"] .nav-status {
+    background: rgba(232,91,10,0.06);
+    border-color: rgba(232,91,10,0.22);
+    color: #E85B0A; animation: none;
+  }
+  [data-universe="true"] .nav-status-dot { background: #E85B0A; }
+</style>
+
+<script>
+  // Bonjour curieux. Tu fouilles les sources ? Bonne initiative.
+  // Piste 1/3 : cherche dans global.css — ligne des design tokens.
+  console.log('%c// dev spotted', 'color: oklch(65% 0.22 260); font-family: monospace;');
+  console.log('%cHint: the logo holds secrets. And the CSS too.', 'color: #6b7280; font-family: monospace; font-size: 11px;');
+
+  import('../js/easter-eggs/stats-egg.js').then(({ initStatsEgg }) => {
+    const logo = document.getElementById('nav-logo');
+    if (logo) initStatsEgg(logo as HTMLElement);
+  });
+
+  import { initNav } from '../js/nav.ts';
+  initNav();
+</script>

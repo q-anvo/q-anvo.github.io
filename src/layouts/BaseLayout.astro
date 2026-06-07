@@ -1,0 +1,42 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?:       string;
+  description?: string;
+  lang?:        'fr' | 'en';
+}
+
+const {
+  title       = 'Quentin Anvo — Développeur Senior Freelance',
+  description = 'Développeur Senior freelance. 10+ ans d\'expérience. Applications web sur mesure, sites vitrines, conseil technique.',
+  lang        = 'fr',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} data-lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content="https://q-anvo.github.io/assets/avatar.png" />
+  <meta property="og:url"         content="https://q-anvo.github.io" />
+  <meta property="og:type"        content="website" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <link rel="icon"        href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <slot />
+  <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
