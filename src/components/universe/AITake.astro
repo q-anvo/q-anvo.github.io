@@ -1,0 +1,159 @@
+---
+---
+
+<section class="ai-take" data-animate-section>
+  <div class="ai-inner">
+
+    <div class="ai-head">
+      <p class="ai-kicker">
+        <span data-fr>Point de vue</span><span data-en>My take</span>
+      </p>
+      <h2 class="ai-title">
+        <span data-fr>L'IA ne remplace pas<br>l'expertise — elle <em>l'amplifie</em>.</span>
+        <span data-en>AI doesn't replace<br>expertise — it <em>amplifies</em> it.</span>
+      </h2>
+    </div>
+
+    <div class="ai-grid">
+
+      <div class="ai-card ai-card--pro">
+        <div class="ai-card-label">
+          <span class="ai-card-icon">⚙️</span>
+          <span data-fr>En production</span><span data-en>In production</span>
+        </div>
+        <p class="ai-card-text">
+          <span data-fr>J'ai la chance d'avoir appris sans. Ça change tout — j'ai une baseline solide pour évaluer ce que l'IA produit. En prod, chaque ligne générée est relue, comprise, challengée.</span>
+          <span data-en>I had the chance to learn without it. That changes everything — I have a solid baseline to evaluate what AI produces. In production, every generated line is read, understood, challenged.</span>
+        </p>
+        <div class="ai-pill">
+          <span data-fr>Mon standard de qualité ne négocie pas avec la vitesse de génération.</span>
+          <span data-en>My quality standard doesn't negotiate with generation speed.</span>
+        </div>
+      </div>
+
+      <div class="ai-card ai-card--perso">
+        <div class="ai-card-label">
+          <span class="ai-card-icon">🧪</span>
+          <span data-fr>En personnel</span><span data-en>Personally</span>
+        </div>
+        <p class="ai-card-text">
+          <span data-fr>L'IA démultiplie ma curiosité — elle m'ouvre des domaines que je n'aurais jamais explorés seul. J'expérimente aussi le vibe coding : créer des projets entiers sans écrire une ligne de code.</span>
+          <span data-en>AI multiplies my curiosity — it opens up domains I'd never have explored alone. I also experiment with vibe coding: building entire projects without writing a single line.</span>
+        </p>
+        <div class="ai-pill ai-pill--accent">
+          <span data-fr>Ce site a été conçu depuis mon mobile, 100% assisté par IA.</span>
+          <span data-en>This site was built from my phone, 100% AI-assisted.</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .ai-take {
+    background: var(--univ-bg, #FAF7F2);
+    padding: clamp(3rem, 6vw, 5rem) 2rem clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--univ-border, rgba(30,15,5,0.08));
+  }
+
+  .ai-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 5vw, 6rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .ai-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--univ-accent, #E85B0A);
+    margin-bottom: 0.75rem;
+  }
+
+  .ai-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--univ-text, #1A0D05);
+  }
+
+  .ai-title em {
+    font-style: normal;
+    background: linear-gradient(90deg, #E85B0A, #C9082A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .ai-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .ai-card {
+    border-radius: 20px;
+    padding: 2rem 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .ai-card--pro {
+    background: #1A0D03;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .ai-card--perso {
+    background: #0d0a1a;
+    border: 1px solid rgba(167,139,250,0.1);
+  }
+
+  .ai-card-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .ai-card-icon { font-size: 1rem; }
+
+  .ai-card-text {
+    font-size: clamp(0.88rem, 1.2vw, 1rem);
+    line-height: 1.75;
+    color: rgba(255,255,255,0.55);
+    flex: 1;
+  }
+
+  .ai-pill {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: rgba(253,185,39,0.85);
+    background: rgba(253,185,39,0.06);
+    border-left: 2px solid rgba(253,185,39,0.4);
+    padding: 0.7rem 1rem;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ai-pill--accent {
+    color: rgba(167,139,250,0.9);
+    background: rgba(167,139,250,0.06);
+    border-left-color: rgba(167,139,250,0.4);
+  }
+
+  @media (max-width: 700px) {
+    .ai-grid { grid-template-columns: 1fr; }
+  }
+</style>

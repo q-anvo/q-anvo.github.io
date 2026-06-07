@@ -1,0 +1,183 @@
+---
+---
+
+<section class="univ-intro" data-animate-section>
+  <div class="univ-intro-inner">
+
+    <div class="univ-photo-wrap">
+      <img src="/assets/quentin-casquette.jpg" alt="Quentin Anvo" class="univ-photo" />
+    </div>
+
+    <div class="univ-content">
+      <p class="univ-kicker">
+        <span data-fr>Hors-Champ</span><span data-en>Off the Clock</span>
+      </p>
+      <h2 class="univ-title">
+        <span data-fr>Mon <em>Univers</em></span>
+        <span data-en>My <em>Universe</em></span>
+      </h2>
+      <div class="univ-tags">
+        <span class="utag utag--nba">
+          <span data-fr>🏀 NBA — insomniaque</span><span data-en>🏀 NBA — insomniac</span>
+        </span>
+        <span class="utag utag--sport">
+          <span data-fr>🏀 USOM — club loisir</span><span data-en>🏀 USOM — leisure club</span>
+        </span>
+        <span class="utag utag--music">🎸 Guitare</span>
+        <span class="utag utag--music">🥁 Batterie</span>
+        <span class="utag utag--music">
+          <span data-fr>🎵 Concerts & festivals</span><span data-en>🎵 Gigs & festivals</span>
+        </span>
+        <span class="utag">
+          <span data-fr>📍 Normand</span><span data-en>📍 From Normandy</span>
+        </span>
+        <span class="utag">34 ans</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .univ-intro {
+    background: linear-gradient(135deg, #FFF3E0 0%, #FAF7F2 60%);
+    border-bottom: 1px solid rgba(232, 91, 10, 0.15);
+    padding: clamp(5rem, 10vw, 8rem) 2rem clamp(3rem, 6vw, 5rem);
+  }
+
+  .univ-intro-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 5vw, 4rem);
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  /* ── Photo ── */
+  .univ-photo-wrap {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    box-shadow:
+      0 8px 32px rgba(232, 91, 10, 0.12),
+      0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .univ-photo-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    border: 1px solid rgba(232, 91, 10, 0.18);
+    pointer-events: none;
+  }
+
+  .univ-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  /* ── Content ── */
+  .univ-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .univ-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #E85B0A;
+  }
+
+  .univ-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    color: #1A0D05;
+  }
+
+  .univ-title em {
+    font-style: normal;
+    background: linear-gradient(90deg, #E85B0A, #C9082A, #FDB927);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Tags ── */
+  .univ-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+  }
+
+  .utag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(30, 15, 5, 0.05);
+    color: rgba(30, 15, 5, 0.5);
+    border: 1px solid rgba(30, 15, 5, 0.1);
+    white-space: nowrap;
+  }
+
+  .utag--nba {
+    background: rgba(253, 185, 39, 0.1);
+    color: #b07d00;
+    border-color: rgba(253, 185, 39, 0.3);
+  }
+
+  .utag--sport {
+    background: rgba(232, 91, 10, 0.07);
+    color: #E85B0A;
+    border-color: rgba(232, 91, 10, 0.2);
+  }
+
+  .utag--music {
+    background: rgba(201, 8, 42, 0.06);
+    color: #9b0020;
+    border-color: rgba(201, 8, 42, 0.18);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .univ-intro-inner {
+      grid-template-columns: 1fr;
+      max-width: 540px;
+    }
+
+    .univ-photo-wrap {
+      aspect-ratio: 4 / 3;
+      max-height: 360px;
+    }
+
+    .univ-photo {
+      object-position: center 20%;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .univ-intro {
+      padding-top: 6rem;
+    }
+
+    .univ-photo-wrap {
+      aspect-ratio: 1 / 1;
+      max-height: 280px;
+      border-radius: 18px;
+    }
+  }
+</style>
