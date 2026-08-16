@@ -21,3 +21,7 @@ pnpm-debug.log*
 .DS_Store
 .idea/
 .vscode/
+
+# Artefacts d'agent (configuration locale, non versionnée)
+.claude/
+.superpowers/
