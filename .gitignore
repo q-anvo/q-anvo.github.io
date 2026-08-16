@@ -25,3 +25,5 @@ pnpm-debug.log*
 # Artefacts d'agent (configuration locale, non versionnée)
 .claude/
 .superpowers/
+
+docs/superpowers/
